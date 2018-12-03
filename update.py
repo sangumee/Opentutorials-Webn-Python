@@ -11,6 +11,7 @@ if 'id' in form:
     pageId = form["id"].value
 
     description = open('data/'+pageId, 'r').read()
+
 else:
     pageId = 'Welcome'
     description = 'Hello, Web'
