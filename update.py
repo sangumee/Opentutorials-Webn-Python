@@ -15,11 +15,9 @@ if 'id' in form:
     pageId = form["id"].value
 
     description = open('data/'+pageId, 'r').read()
-    update_link = '<a href="update.py?id={}">Update</a>'.format(pageId)
 else:
     pageId = 'Welcome'
     description = 'Hello, Web'
-    update_link = ''
 
 print('''<!doctype html>
 <html>
@@ -33,9 +31,12 @@ print('''<!doctype html>
     {listStr}
   </ol>
   <a href="create.py">Create</a>
-  {update_link}
-  <h2>{title}</h2>
-  <p>{desc}</p>
+    <form action="update_process.py" method="post">
+    <input type="hidden" name="pageId" value="{form_default_title}">
+    <p><input type="text" name="title" placeholder="title" value="{form_default_title}"></p>
+    <p><textarea rows="6" name="description" placeholder="description">{form_default_description}</textarea></p>
+    <p><input type="submit"><p>
+  </form>
 </body>
 </html>
-'''.format(title=pageId, desc=description, listStr=listStr, update_link=update_link))
+'''.format(title=pageId, desc=description, listStr=listStr, form_default_title=pageId, form_default_description=description))
